@@ -1,10 +1,11 @@
 //
-//  ViewController.swift
+//  HomeVC.swift
 //  AutolayoutPractice
 //
-//  Created by amanda on 5/31/24.
+//  Created by Amanda Benavente on 6/17/24.
 //
 
+import Foundation
 import UIKit
 
 class HomeViewController: UIViewController {
@@ -21,12 +22,11 @@ class HomeViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-
     }
 
     func setupButton() {
         view.addSubview(button)
-        button.setTitle("Start", for: .normal)
+        button.setTitle("View Reminders", for: .normal)
         button.backgroundColor = .systemMint
         button.addTarget(self, action: #selector(navigateTo), for: .touchUpInside)
         button.layer.cornerRadius = 8
@@ -40,6 +40,6 @@ class HomeViewController: UIViewController {
     }
 
     @objc func navigateTo() {
-        navigationController?.pushViewController(RemindersViewController(), animated: true)
+        navigationController?.pushViewController(RemindersListViewController(), animated: true)
     }
 }

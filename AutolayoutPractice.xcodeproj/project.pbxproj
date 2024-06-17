@@ -16,6 +16,7 @@
 		5373E3D32C0AD203003C21A9 /* AutolayoutPracticeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5373E3D22C0AD203003C21A9 /* AutolayoutPracticeUITests.swift */; };
 		5373E3D52C0AD203003C21A9 /* AutolayoutPracticeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5373E3D42C0AD203003C21A9 /* AutolayoutPracticeUITestsLaunchTests.swift */; };
 		5373E3E22C0BC1A0003C21A9 /* RemindersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5373E3E12C0BC1A0003C21A9 /* RemindersViewController.swift */; };
+		690F422B2C20874700F4C344 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690F422A2C20874700F4C344 /* Reminder.swift */; };
 		691F1EBD2C1A2CC600A20726 /* SwiftFormat in Frameworks */ = {isa = PBXBuildFile; productRef = 691F1EBC2C1A2CC600A20726 /* SwiftFormat */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		5373E3D22C0AD203003C21A9 /* AutolayoutPracticeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutolayoutPracticeUITests.swift; sourceTree = "<group>"; };
 		5373E3D42C0AD203003C21A9 /* AutolayoutPracticeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutolayoutPracticeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5373E3E12C0BC1A0003C21A9 /* RemindersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersViewController.swift; sourceTree = "<group>"; };
+		690F422A2C20874700F4C344 /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reminder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 		5373E3B02C0AD1FE003C21A9 /* AutolayoutPractice */ = {
 			isa = PBXGroup;
 			children = (
+				690F42282C20850E00F4C344 /* RemindersList */,
 				5373E3B12C0AD1FE003C21A9 /* AppDelegate.swift */,
 				5373E3B32C0AD1FE003C21A9 /* SceneDelegate.swift */,
 				5373E3B52C0AD1FE003C21A9 /* ViewController.swift */,
@@ -128,6 +131,22 @@
 				5373E3D42C0AD203003C21A9 /* AutolayoutPracticeUITestsLaunchTests.swift */,
 			);
 			path = AutolayoutPracticeUITests;
+			sourceTree = "<group>";
+		};
+		690F42282C20850E00F4C344 /* RemindersList */ = {
+			isa = PBXGroup;
+			children = (
+				690F42292C20873700F4C344 /* Model */,
+			);
+			path = RemindersList;
+			sourceTree = "<group>";
+		};
+		690F42292C20873700F4C344 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				690F422A2C20874700F4C344 /* Reminder.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		691F1EBB2C1A2CC600A20726 /* Frameworks */ = {
@@ -300,6 +319,7 @@
 				5373E3B62C0AD1FE003C21A9 /* ViewController.swift in Sources */,
 				5373E3B22C0AD1FE003C21A9 /* AppDelegate.swift in Sources */,
 				5373E3B42C0AD1FE003C21A9 /* SceneDelegate.swift in Sources */,
+				690F422B2C20874700F4C344 /* Reminder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

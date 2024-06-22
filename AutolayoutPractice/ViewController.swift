@@ -21,7 +21,7 @@ class HomeViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        
+
     }
 
     func setupButton() {
@@ -30,7 +30,7 @@ class HomeViewController: UIViewController {
         button.backgroundColor = .systemMint
         button.addTarget(self, action: #selector(navigateTo), for: .touchUpInside)
         button.layer.cornerRadius = 8
-        
+
         button.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -38,9 +38,8 @@ class HomeViewController: UIViewController {
             button.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5)
         ])
     }
-    
-    @objc func navigateTo() {        
+
+    @objc func navigateTo() {
         navigationController?.pushViewController(RemindersViewController(), animated: true)
     }
 }
-

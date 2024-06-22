@@ -14,7 +14,7 @@ class RemindersViewController: UIViewController {
         view.backgroundColor = .systemPink
         self.title = "Reminders"
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]

@@ -8,7 +8,12 @@
 import Foundation
 import UIKit
 
-class RemindersListViewController: UIViewController {
+class RemindersListViewController: UIViewController, AddReminderDelegate {
+    func addReminder(title: String, description: String, dueDate: Date) {
+        viewModel.addReminder(title: title, description: description, dueDate: dueDate)
+        reloadTableView()
+    }
+
     private let tableView = UITableView()
     private let viewModel = RemindersViewModel()
 
@@ -21,19 +26,20 @@ class RemindersListViewController: UIViewController {
 
     @objc private func openAddReminderSheet() {
         let sheetViewController = AddReminderViewController()
+        sheetViewController.delegate = self
         present(sheetViewController, animated: true)
     }
 
     private func configureTableView() {
         view.addSubview(tableView)
-        tableView.backgroundView = emptyTableView()
         tableView.estimatedRowHeight = 90
         tableView.rowHeight = UITableView.automaticDimension
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ReminderCell.self, forCellReuseIdentifier: String(describing: ReminderCell.self))
         tableView.translatesAutoresizingMaskIntoConstraints = false
-
+        reloadTableView()
+        
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -59,6 +65,15 @@ class RemindersListViewController: UIViewController {
         ])
 
         return backgroundView
+    }
+    
+    private func reloadTableView() {
+        if viewModel.reminders.isEmpty {
+            tableView.backgroundView = emptyTableView()
+        } else {
+            tableView.backgroundView = nil
+        }
+        tableView.reloadData()
     }
 }
 

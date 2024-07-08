@@ -7,11 +7,12 @@
 
 import Foundation
 
-class RemindersViewModel: ObservableObject {
+class RemindersViewModel {
     var reminders: [Reminder] = []
 
-    init() {
-        createReminders()
+    func addReminder(title: String, description: String, dueDate: Date) {
+        let newReminder = Reminder(title: title, description: description, dueDate: dueDate, completed: false)
+        reminders.insert(newReminder, at: 0)
     }
 
     private func createReminders() {
@@ -21,5 +22,4 @@ class RemindersViewModel: ObservableObject {
         reminders.append(Reminder(title: "RSVP for Danny's Dance Recital", description: "RSVP for 3 people", dueDate: Date(), completed: false))
         reminders.append(Reminder(title: "Call insurance company", description: "Make sure the have full coverage", dueDate: Date(), completed: false))
     }
-
 }

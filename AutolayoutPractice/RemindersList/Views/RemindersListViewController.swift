@@ -14,17 +14,51 @@ class RemindersListViewController: UIViewController {
 
     override func viewDidLoad() {
         self.title = "Reminders"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(openAddReminderSheet))
         configureTableView()
+    }
+
+    @objc private func openAddReminderSheet() {
+        let sheetViewController = AddReminderViewController()
+        present(sheetViewController, animated: true)
     }
 
     private func configureTableView() {
         view.addSubview(tableView)
-        tableView.frame = view.bounds
+        tableView.backgroundView = emptyTableView()
         tableView.estimatedRowHeight = 90
         tableView.rowHeight = UITableView.automaticDimension
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ReminderCell.self, forCellReuseIdentifier: String(describing: ReminderCell.self))
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.rightAnchor)
+        ])
+    }
+
+    private func emptyTableView() -> UIView {
+        let backgroundView = UIView()
+        let messageLabel = UILabel()
+        messageLabel.text = "Looks like you don't have any reminders!"
+        messageLabel.numberOfLines = 0
+        messageLabel.textAlignment = .center
+        messageLabel.font = .systemFont(ofSize: 18)
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.addSubview(messageLabel)
+
+        NSLayoutConstraint.activate([
+            messageLabel.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+            messageLabel.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor),
+            messageLabel.widthAnchor.constraint(equalTo: backgroundView.widthAnchor, multiplier: 0.5)
+        ])
+
+        return backgroundView
     }
 }
 

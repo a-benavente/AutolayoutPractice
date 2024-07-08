@@ -7,7 +7,12 @@
 
 import UIKit
 
+protocol AddReminderDelegate: AnyObject {
+    func addReminder(title: String, description: String, dueDate: Date)
+}
+
 class AddReminderViewController: UIViewController {
+    weak var delegate: AddReminderDelegate?
     
     private lazy var cancelButton: UIButton = {
         let button = UIButton(type: .system)
@@ -75,8 +80,8 @@ class AddReminderViewController: UIViewController {
     }
 
     @objc private func saveAction() {
-        // no-op
-        dismiss(animated: true, completion: nil)
+        delegate?.addReminder(title: titleTextField.text ?? "", description: descriptionTextView.text ?? "", dueDate: dueDatePicker.date)
+        dismiss(animated: true)
     }
     
     private func configure () {

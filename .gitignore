@@ -1,0 +1,12 @@
+## User settings
+xcuserdata/
+
+.DS_Store
+
+# Xcode build files
+DerivedData/
+build/
+
+*.pbxuser
+
+*.xccheckout

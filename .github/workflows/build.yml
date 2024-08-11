@@ -12,8 +12,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: SwiftLint
+      - name: Install and Run SwiftLint
         run: |
+          brew install swiftlint |
           ./scripts/swift_lint.sh
       - name: Set Default Scheme
         run: |

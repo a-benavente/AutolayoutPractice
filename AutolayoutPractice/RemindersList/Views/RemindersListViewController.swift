@@ -39,7 +39,7 @@ class RemindersListViewController: UIViewController, AddReminderDelegate {
         tableView.register(ReminderCell.self, forCellReuseIdentifier: String(describing: ReminderCell.self))
         tableView.translatesAutoresizingMaskIntoConstraints = false
         reloadTableView()
-        
+
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -66,7 +66,7 @@ class RemindersListViewController: UIViewController, AddReminderDelegate {
 
         return backgroundView
     }
-    
+
     private func reloadTableView() {
         if viewModel.reminders.isEmpty {
             tableView.backgroundView = emptyTableView()

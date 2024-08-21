@@ -87,11 +87,7 @@ class AddReminderViewController: UIViewController {
     }
 
     @objc private func textFieldDidChange(_ textField: UITextField) {
-        if textField.text?.isEmpty == true {
-            saveButton.isEnabled = false
-        } else {
-            saveButton.isEnabled = true
-        }
+        saveButton.isEnabled = textField.text?.isEmpty != true
     }
 
     private func configure () {

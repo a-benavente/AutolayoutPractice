@@ -13,7 +13,7 @@ protocol AddReminderDelegate: AnyObject {
 
 class AddReminderViewController: UIViewController {
     weak var delegate: AddReminderDelegate?
-    
+
     private lazy var cancelButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Close", for: .normal)
@@ -22,21 +22,23 @@ class AddReminderViewController: UIViewController {
         button.addTarget(self, action: #selector(dismissSheet), for: .touchUpInside)
         return button
     }()
-    
+
     private lazy var saveButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Save", for: .normal)
         button.titleLabel?.font = .preferredFont(forTextStyle: .body)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.isEnabled = false
         button.addTarget(self, action: #selector(saveAction), for: .touchUpInside)
         return button
     }()
 
-    private let titleTextField: UITextField = {
+    private lazy var titleTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = "Label for your reminder"
+        textField.placeholder = "Title"
+        textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         return textField
     }()
 
@@ -83,7 +85,11 @@ class AddReminderViewController: UIViewController {
         delegate?.addReminder(title: titleTextField.text ?? "", description: descriptionTextView.text ?? "", dueDate: dueDatePicker.date)
         dismiss(animated: true)
     }
-    
+
+    @objc private func textFieldDidChange(_ textField: UITextField) {
+        saveButton.isEnabled = textField.text?.isEmpty != true
+    }
+
     private func configure () {
         view.addSubview(cancelButton)
         view.addSubview(saveButton)
@@ -99,6 +105,7 @@ class AddReminderViewController: UIViewController {
             saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             titleTextField.topAnchor.constraint(equalTo: cancelButton.bottomAnchor, constant: 30),
+            titleTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
             descriptionLabel.leadingAnchor.constraint(equalTo: titleTextField.leadingAnchor),
             descriptionLabel.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 25),
             descriptionTextView.leadingAnchor.constraint(equalTo: descriptionLabel.leadingAnchor),

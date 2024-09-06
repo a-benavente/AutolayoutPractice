@@ -91,4 +91,11 @@ extension RemindersListViewController: UITableViewDelegate, UITableViewDataSourc
 
         return cell
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let reminder = viewModel.reminders[indexPath.row]
+        let reminderDetailsView = ReminderDetailsViewController()
+        reminderDetailsView.configuration = ReminderDetailConfiguration(title: reminder.title, description: reminder.description, dueDateString: reminder.dueDate.formatted(date: .numeric, time: .omitted), completed: reminder.completed)
+        navigationController?.pushViewController(reminderDetailsView, animated: true)
+    }
 }

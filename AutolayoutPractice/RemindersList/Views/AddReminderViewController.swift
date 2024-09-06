@@ -8,7 +8,7 @@
 import UIKit
 
 protocol AddReminderDelegate: AnyObject {
-    func addReminder(title: String, description: String, dueDate: Date)
+    func addReminder(title: String, description: String, dueDate: Date, isPriority: Bool)
 }
 
 class AddReminderViewController: UIViewController {
@@ -46,6 +46,7 @@ class AddReminderViewController: UIViewController {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
         lbl.text = "Add details for your reminder"
+        lbl.font = .preferredFont(forTextStyle: .callout)
         return lbl
     }()
 
@@ -57,6 +58,19 @@ class AddReminderViewController: UIViewController {
         textView.layer.borderWidth = 1
         textView.font = .preferredFont(forTextStyle: .body)
         return textView
+    }()
+
+    private let priorityLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.text = "Mark as important?"
+        return lbl
+    }()
+
+    private let priorityToggle: UISwitch = {
+        let uiSwitch = UISwitch()
+        uiSwitch.translatesAutoresizingMaskIntoConstraints = false
+        return uiSwitch
     }()
 
     private let dueDatePicker: UIDatePicker = {
@@ -82,7 +96,7 @@ class AddReminderViewController: UIViewController {
     }
 
     @objc private func saveAction() {
-        delegate?.addReminder(title: titleTextField.text ?? "", description: descriptionTextView.text ?? "", dueDate: dueDatePicker.date)
+        delegate?.addReminder(title: titleTextField.text ?? "", description: descriptionTextView.text ?? "", dueDate: dueDatePicker.date, isPriority: priorityToggle.isOn )
         dismiss(animated: true)
     }
 
@@ -96,6 +110,8 @@ class AddReminderViewController: UIViewController {
         view.addSubview(titleTextField)
         view.addSubview(descriptionLabel)
         view.addSubview(descriptionTextView)
+        view.addSubview(priorityLabel)
+        view.addSubview(priorityToggle)
         view.addSubview(dueDatePicker)
 
         NSLayoutConstraint.activate([
@@ -103,16 +119,20 @@ class AddReminderViewController: UIViewController {
             cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             saveButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 15),
             saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             titleTextField.topAnchor.constraint(equalTo: cancelButton.bottomAnchor, constant: 30),
             titleTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
             descriptionLabel.leadingAnchor.constraint(equalTo: titleTextField.leadingAnchor),
             descriptionLabel.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 25),
             descriptionTextView.leadingAnchor.constraint(equalTo: descriptionLabel.leadingAnchor),
-            descriptionTextView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 7),
+            descriptionTextView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 4),
             descriptionTextView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
             descriptionTextView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1),
-            dueDatePicker.topAnchor.constraint(equalTo: descriptionTextView.bottomAnchor, constant: 30),
+            priorityLabel.topAnchor.constraint(equalTo: descriptionTextView.bottomAnchor, constant: 27),
+            priorityLabel.leadingAnchor.constraint(equalTo: descriptionTextView.leadingAnchor),
+            priorityToggle.topAnchor.constraint(equalTo: priorityLabel.topAnchor),
+            priorityToggle.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+            dueDatePicker.topAnchor.constraint(equalTo: priorityLabel.bottomAnchor, constant: 20),
             dueDatePicker.leadingAnchor.constraint(equalTo: titleTextField.leadingAnchor)
         ])
     }

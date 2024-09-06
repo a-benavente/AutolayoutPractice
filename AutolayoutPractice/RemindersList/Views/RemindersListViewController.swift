@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 class RemindersListViewController: UIViewController, AddReminderDelegate {
-    func addReminder(title: String, description: String, dueDate: Date) {
-        viewModel.addReminder(title: title, description: description, dueDate: dueDate)
+    func addReminder(title: String, description: String, dueDate: Date, isPriority: Bool) {
+        viewModel.addReminder(title: title, description: description, dueDate: dueDate, isPriority: isPriority)
         reloadTableView()
     }
 
@@ -87,7 +87,7 @@ extension RemindersListViewController: UITableViewDelegate, UITableViewDataSourc
             return UITableViewCell()
         }
         let reminder = viewModel.reminders[indexPath.row]
-        cell.configuration = ReminderCellConfiguration(title: reminder.title, description: reminder.description, dueDateString: reminder.dueDate.formatted(date: .numeric, time: .omitted))
+        cell.configuration = ReminderCellConfiguration(title: reminder.title, description: reminder.description, dueDateString: reminder.dueDate.formatted(date: .numeric, time: .omitted), isPriority: reminder.isPriority)
 
         return cell
     }

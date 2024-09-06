@@ -11,4 +11,5 @@ struct ReminderCellConfiguration {
     let title: String
     let description: String
     let dueDateString: String
+    let isPriority: Bool
 }

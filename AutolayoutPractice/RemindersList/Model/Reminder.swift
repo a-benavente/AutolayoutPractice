@@ -12,4 +12,5 @@ struct Reminder: Codable {
     var description: String
     var dueDate: Date
     var completed: Bool
+    var isPriority: Bool
 }
